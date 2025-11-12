@@ -14,7 +14,16 @@
     <div id="loginSection">
       <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">🔐 Pilih Jenis Pengguna</h2>
 
-      <select id="role" onchange="showInput()" 
+<!-- Pilihan tema -->
+<div class="flex justify-center gap-2 mb-4">
+  <button onclick="setTheme('light')" class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-lg text-gray-700 dark:text-gray-100 text-sm">
+    ☀️ Terang
+  </button>
+  <button onclick="setTheme('dark')" class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-lg text-gray-700 dark:text-gray-100 text-sm">
+    🌙 Gelap
+  </button>
+</div>
+
         class="border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-blue-400">
         <option value="">-- Pilih --</option>
         <option value="pegawai">Pegawai</option>
@@ -176,6 +185,32 @@
       darkMode = !darkMode;
       document.documentElement.classList.toggle("dark");
     }
+    // Simpan preferensi mode user
+function setTheme(mode) {
+  if (mode === 'dark') {
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+// Muat preferensi mode saat web dibuka
+function loadTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+}
+
+// Jalankan saat halaman pertama kali dibuka
+loadTheme();
+
   </script>
 </body>
 </html>
+
+
